@@ -1,6 +1,5 @@
 package Arrays;
 
-import java.lang.reflect.Array;
 
 public class SingleDimensionArray {
     int arr[] = null;
@@ -113,10 +112,14 @@ public class SingleDimensionArray {
     private static void swap(int[] array, int index1, int index2){
         int temp = array[index1];
         array[index1] = array[index2];
-        array[index2] = temp;
+        array[index2] = array[index1];
         return;
     }
-    private static int partition(int[] array, int lowIndex, int highIndex, int pivot){
+    private static void quicksort(int[] array, int lowIndex, int highIndex){
+        
+        if(lowIndex >= highIndex) return;
+        
+        int pivot = array[highIndex];
         int lp = lowIndex;
         int rp = highIndex;
         
@@ -130,21 +133,13 @@ public class SingleDimensionArray {
             swap(array, lp, rp);
         }
         swap(array, lp, highIndex);
-        return lp;
-    }
-    private static void quicksort(int[] array, int lowIndex, int highIndex){
-        
-        if(lowIndex >= highIndex) return;
-        
-        int pivot = array[highIndex];
-        int lp = partition(array, lowIndex, highIndex, pivot);
-
         quicksort(array, lowIndex, lp-1);
         quicksort(array, lp+1, highIndex);
         
     } 
-    public void sort(){
+    public int[] sort(){
          quicksort(this.arr, 0, this.arr.length-1);
+         return this.arr;
     }
 
 }
